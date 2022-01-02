@@ -39,7 +39,7 @@
 	 </developers>
 
 	<scm>
-	  <connection>scm:git:git://github.com/microlam-io/${project.artifactId}.git</connection>
+	  <connection>scm:git:ssh://git@github.com/microlam-io/${project.artifactId}.git</connection>
 	  <developerConnection>scm:git:ssh://git@github.com/microlam-io/${project.artifactId}.git</developerConnection>
 	  <url>https://github.com/microlam-io/${project.artifactId}/tree/master</url>
   </scm>
