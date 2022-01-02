@@ -6,7 +6,7 @@
   <parent>
     <groupId>io.microlam</groupId>
     <artifactId>microlam-bom</artifactId>
-    <version>0.3-SNAPSHOT</version>
+    <version>0.3</version>
 	<relativePath>./microlam-bom/pom.xml</relativePath>
   </parent>
 
@@ -42,6 +42,7 @@
 	  <connection>scm:git:ssh://git@github.com/microlam-io/${project.artifactId}.git</connection>
 	  <developerConnection>scm:git:ssh://git@github.com/microlam-io/${project.artifactId}.git</developerConnection>
 	  <url>https://github.com/microlam-io/${project.artifactId}/tree/master</url>
+    <tag>microlam-0.3</tag>
   </scm>
 
 	<distributionManagement>
