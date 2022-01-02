@@ -1,0 +1,24 @@
+[submodule "microlam-aws-lambda"]
+	path = microlam-aws-lambda
+	url = git@github.com:microlam-io/microlam-aws-lambda.git
+[submodule "microlam-json"]
+	path = microlam-json
+	url = git@github.com:microlam-io/microlam-json.git
+[submodule "microlam-utils"]
+	path = microlam-utils
+	url = git@github.com:microlam-io/microlam-utils.git
+[submodule "microlam-params"]
+	path = microlam-params
+	url = git@github.com:microlam-io/microlam-params.git
+[submodule "microlam-params-aws"]
+	path = microlam-params-aws
+	url = git@github.com:microlam-io/microlam-params-aws.git
+[submodule "microlam-aws-auth"]
+	path = microlam-aws-auth
+	url = git@github.com:microlam-io/microlam-aws-auth.git
+[submodule "microlam-lambda-quickstart"]
+	path = microlam-lambda-quickstart
+	url = git@github.com:microlam-io/microlam-lambda-quickstart.git
+[submodule "microlam-lambda-pipeline-quickstart"]
+	path = microlam-lambda-pipeline-quickstart
+	url = git@github.com:microlam-io/microlam-lambda-pipeline-quickstart.git
