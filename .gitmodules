@@ -22,3 +22,6 @@
 [submodule "microlam-lambda-pipeline-quickstart"]
 	path = microlam-lambda-pipeline-quickstart
 	url = git@github.com:microlam-io/microlam-lambda-pipeline-quickstart.git
+[submodule "microlam-bom"]
+	path = microlam-bom
+	url = git@github.com:microlam-io/microlam-bom.git
