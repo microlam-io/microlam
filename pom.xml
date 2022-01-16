@@ -7,7 +7,6 @@
     <groupId>io.microlam</groupId>
     <artifactId>microlam-bom</artifactId>
     <version>0.3.1-SNAPSHOT</version>
-	<relativePath>./microlam-bom/pom.xml</relativePath>
   </parent>
 
   <artifactId>microlam</artifactId>
@@ -64,7 +63,6 @@
   </properties>
 
 <modules>
-	<module>microlam-bom</module>
     <module>microlam-json</module>
     <module>microlam-utils</module>
     <module>microlam-params</module>

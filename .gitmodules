@@ -16,6 +16,3 @@
 [submodule "microlam-aws-auth"]
 	path = microlam-aws-auth
 	url = git@github.com:microlam-io/microlam-aws-auth.git
-[submodule "microlam-bom"]
-	path = microlam-bom
-	url = git@github.com:microlam-io/microlam-bom.git
