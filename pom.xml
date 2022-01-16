@@ -6,8 +6,7 @@
   <parent>
     <groupId>io.microlam</groupId>
     <artifactId>microlam-bom</artifactId>
-    <version>0.4-SNAPSHOT</version>
-	<relativePath>./microlam-bom/pom.xml</relativePath>
+    <version>0.3.1-SNAPSHOT</version>
   </parent>
 
   <artifactId>microlam</artifactId>
@@ -75,46 +74,6 @@
 </modules>
 
 <build>
-
-	<pluginManagement>
-	<plugins>
-	  <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.0</version>
-	 </plugin>
-     <plugin>
-      	<groupId>org.apache.maven.plugins</groupId>
-      	<artifactId>maven-source-plugin</artifactId>
-      	<version>3.2.0</version>
- 	</plugin>
-     <plugin>
-      	<groupId>org.apache.maven.plugins</groupId>
-      	<artifactId>maven-javadoc-plugin</artifactId>
-      	<version>3.3.1</version>
- 	</plugin>
-     <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-         <version>3.2.0</version>
- 	</plugin>
-     <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-gpg-plugin</artifactId>
-      <version>1.6</version>
- 	</plugin>
-     <plugin>
-      <groupId>org.sonatype.plugins</groupId>
-      <artifactId>nexus-staging-maven-plugin</artifactId>
-      <version>1.6.7</version>
- 	</plugin>
-     <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>3.0.0-M4</version>
- 	</plugin>
-	</plugins>
-	</pluginManagement>
 
 	<plugins>
 
@@ -202,6 +161,11 @@
       </dependencies>
     	</plugin>
     	
+		<plugin>
+		    <groupId>org.codehaus.mojo</groupId>
+		    <artifactId>versions-maven-plugin</artifactId>
+		</plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
