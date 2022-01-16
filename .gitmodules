@@ -16,12 +16,6 @@
 [submodule "microlam-aws-auth"]
 	path = microlam-aws-auth
 	url = git@github.com:microlam-io/microlam-aws-auth.git
-[submodule "microlam-lambda-quickstart"]
-	path = microlam-lambda-quickstart
-	url = git@github.com:microlam-io/microlam-lambda-quickstart.git
-[submodule "microlam-lambda-pipeline-quickstart"]
-	path = microlam-lambda-pipeline-quickstart
-	url = git@github.com:microlam-io/microlam-lambda-pipeline-quickstart.git
 [submodule "microlam-bom"]
 	path = microlam-bom
 	url = git@github.com:microlam-io/microlam-bom.git

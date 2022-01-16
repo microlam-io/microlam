@@ -69,8 +69,6 @@
     <module>microlam-params-aws</module>
     <module>microlam-aws-auth</module>
     <module>microlam-aws-lambda</module>
-    <module>microlam-lambda-quickstart</module>
-    <module>microlam-lambda-pipeline-quickstart</module>
 </modules>
 
 <build>
