@@ -1,6 +1,6 @@
 # Release
 
 ```bash.sh
-mvn -X -DdryRun=false -DcommitByProject=true -Dresume=false release:prepare release:perform
+mvn -X clean -DdryRun=false  -Dresume=false release:prepare release:perform
 ```
 
