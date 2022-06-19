@@ -2,10 +2,10 @@ package io.microlam.json;
 
 import java.util.Map;
 
-import com.google.gson.JsonElement;
+import jakarta.json.JsonValue;
 
 public interface JsonFilter {
 
-	JsonElement filter(JsonElement jsonElement, Map<String,String> uploadedFiles);
+	JsonValue filter(JsonValue jsonElement, Map<String,String> uploadedFiles);
 	
 }

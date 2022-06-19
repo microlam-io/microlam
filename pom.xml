@@ -6,7 +6,7 @@
   <parent>
     <groupId>io.microlam</groupId>
     <artifactId>microlam-bom</artifactId>
-    <version>0.3.4-SNAPSHOT</version>
+    <version>0.4.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>microlam</artifactId>
@@ -69,6 +69,7 @@
     <module>microlam-params-aws</module>
     <module>microlam-aws-auth</module>
     <module>microlam-aws-lambda</module>
+    <module>microlam-dynamodb</module>
 </modules>
 
 <build>

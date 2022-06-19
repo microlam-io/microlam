@@ -6,11 +6,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
-import com.google.gson.Gson;
 
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageEncoder;
+import jakarta.json.bind.Jsonb;
+import jakarta.json.bind.JsonbBuilder;
 
 @Sharable
 public class APIGatewayProxyResponseEventEncoder<T> extends MessageToMessageEncoder<T>{
@@ -27,10 +28,10 @@ public class APIGatewayProxyResponseEventEncoder<T> extends MessageToMessageEnco
 	@Override
 	protected void encode(ChannelHandlerContext ctx, T msg, List<Object> out) throws Exception {
 		LOGGER.debug("Entering APIGatewayProxyResponseEventEncoder.encode()");
-		Gson gson = new Gson();
+		Jsonb jsonb = JsonbBuilder.create();
 //	    Type sooper = getClass().getGenericSuperclass();
 //	    Type t = ((ParameterizedType)sooper).getActualTypeArguments()[ 0 ];
-	    String body = gson.toJson(msg, typeOfT);
+	    String body = jsonb.toJson(msg, typeOfT);
 	    APIGatewayProxyResponseEvent apiGatewayProxyOutputEvent = new APIGatewayProxyResponseEvent();
 	    apiGatewayProxyOutputEvent.withIsBase64Encoded(false);
 	    apiGatewayProxyOutputEvent.withBody(body);

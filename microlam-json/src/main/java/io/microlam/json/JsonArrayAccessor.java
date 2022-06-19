@@ -1,8 +1,7 @@
 package io.microlam.json;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonNull;
+import jakarta.json.JsonArray;
+import jakarta.json.JsonValue;
 
 public class JsonArrayAccessor implements JsonAccessor {
 
@@ -17,10 +16,10 @@ public class JsonArrayAccessor implements JsonAccessor {
 	}
 
 	@Override
-	public JsonElement set(JsonElement value) {
+	public JsonValue set(JsonValue value) {
 		if (index >= array.size()) {
 		      for(int i=array.size(); i<index+1; i++) {
-		    	  array.add(JsonNull.INSTANCE);
+		    	  array.add(JsonValue.NULL);
 		      }
 		}
 	    array.set(index, value);
@@ -28,9 +27,9 @@ public class JsonArrayAccessor implements JsonAccessor {
 	}
 
 	@Override
-	public JsonElement get() {
+	public JsonValue get() {
 	    if (index >= array.size()) {
-	        return JsonNull.INSTANCE;
+	        return JsonValue.NULL;
 	      }
 	      return array.get(index);
 	}

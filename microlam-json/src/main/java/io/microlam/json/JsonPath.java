@@ -1,9 +1,12 @@
 package io.microlam.json;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonNull;
-import com.google.gson.JsonObject;
+import java.io.StringReader;
+
+import jakarta.json.Json;
+import jakarta.json.JsonArray;
+import jakarta.json.JsonObject;
+import jakarta.json.JsonValue;
+import jakarta.json.JsonValue.ValueType;
 
 public class JsonPath {
 
@@ -19,18 +22,18 @@ public class JsonPath {
 	}
 	
 	
-	public JsonElement get(String jsonObject) {
-	    JsonElement json = new JsonBuilder().parseJson(jsonObject);
+	public JsonValue get(String jsonObject) {
+		JsonValue json = Json.createParser(new StringReader(jsonObject)).getValue();
 	    return get(json);
 	}
 	
-	public JsonElement get(JsonElement result) {
+	public JsonValue get(JsonValue result) {
 //	    print('JsonPath($jsonPath).get($jsonObject)');
 	    if ((parts.length == 1) && (parts[0].equals("$"))) {
 	      //jsonPath is only $
 	      return result;
 	    }
-	    JsonElement current = result; //not requiring start with dollar symbol
+	    JsonValue current = result; //not requiring start with dollar symbol
 	    for (String part : parts) {
 	      if (part.equals("$")) {
 	        current = result; //do nothing
@@ -38,16 +41,16 @@ public class JsonPath {
 	      else if (part.endsWith("]")) {
 	        String valueString = part.substring(0, part.length() - 1);
 	        int valueInt = Integer.parseInt(valueString);
-	        if (current.isJsonArray()) {
-	          JsonArray array = current.getAsJsonArray();
+	        if (current.getValueType() == ValueType.ARRAY) {
+	          JsonArray array = current.asJsonArray();
 	          current = array.get(valueInt);
 	        }
 	        else {
 	          return null;
 	        }
 	      }
-	      else if ((current != null) && current.isJsonObject()) {
-	    	  JsonObject object =  current.getAsJsonObject();
+	      else if ((current != null) && (current.getValueType() == ValueType.OBJECT)) {
+	    	  JsonObject object =  current.asJsonObject();
 	    	  current = object.get(part);
 	      }
 	      else {
@@ -57,19 +60,19 @@ public class JsonPath {
 	    return current;
 	}
 	
-	  public JsonElement set(String jsonObject, JsonElement value) {
+	  public JsonValue set(String jsonObject, JsonValue value) {
 //	    print('JsonPath($jsonPath).set($jsonObject, $value)');
-	    JsonElement result = new JsonBuilder().parseJson(jsonObject);
+		  JsonValue result = Json.createParser(new StringReader(jsonObject)).getValue();;
 	    return set(result, value);
 	  }
 	  
-	  public JsonElement set(JsonElement result, JsonElement value) {
+	  public JsonValue set(JsonValue result, JsonValue value) {
 //		    print('JsonPath($jsonPath).set($jsonObject, $value)');
 	    if ((parts.length == 1) && (parts[0].equals("$"))) {
 	      //jsonPath is only $
 	      return value;
 	    }
-	    JsonElement current = result;
+	    JsonValue current = result;
 	    JsonAccessor accessor = null;
 	    for(String part : parts) {
 	      if (part.equals("$") || (part.length() == 0)) {
@@ -79,57 +82,57 @@ public class JsonPath {
 	        String valueString = part.substring(0, part.length()-1);
 	        try {
 	        	int valueInt = Integer.parseInt(valueString);
-		        if ((current != null) && current.isJsonArray()) {
-			          JsonArray array = current.getAsJsonArray();
+		        if ((current != null) && (current.getValueType() == ValueType.ARRAY)) {
+			          JsonArray array = current.asJsonArray();
 			          accessor = new JsonArrayAccessor(array, valueInt);
-			          JsonElement accessed = accessor.get();
+			          JsonValue accessed = accessor.get();
 			          //if (accessed != null) {
 			            current = accessed;
 			            continue;
 			          //}
 		        }
 		        else {
-		            current = new JsonArray();
+		            current = Json.createArrayBuilder().build();
 		            if (accessor != null) {
 		              accessor.set(current);
 		            }
 		            else {
 		              result = current;
 		            }
-		            accessor = new JsonArrayAccessor(current.getAsJsonArray(), valueInt);
+		            accessor = new JsonArrayAccessor(current.asJsonArray(), valueInt);
 		            accessor.set(null);
 		            current = null;
 		            continue;
 		        }
 	        }
 	        catch(NumberFormatException nex) {
-		        if ((current != null) && current.isJsonObject()) {
-			          JsonObject object = current.getAsJsonObject();
+		        if ((current != null) && (current.getValueType() == ValueType.OBJECT)) {
+			          JsonObject object = current.asJsonObject();
 			          accessor = new JsonObjectAccessor(object, valueString);
-			          JsonElement accessed = accessor.get();
+			          JsonValue accessed = accessor.get();
 			          //if (accessed != null) {
 			            current = accessed;
 			            continue;
 			          //}
 		        }
 		        else {
-		            current = new JsonObject();
+		            current = Json.createObjectBuilder().build();
 		            if (accessor != null) {
 		              accessor.set(current);
 		            }
 		            else {
 		              result = current;
 		            }
-		            accessor = new JsonObjectAccessor(current.getAsJsonObject(), valueString);
+		            accessor = new JsonObjectAccessor(current.asJsonObject(), valueString);
 		            accessor.set(null);
 		            current = null;
 		            continue;
 		        }
 	        }
 	      }
-	      else if ((current != null) && current.isJsonObject()) {
-	        accessor = new JsonObjectAccessor(current.getAsJsonObject(), part);
-	        JsonElement accessed = accessor.get();
+	      else if ((current != null) && (current.getValueType() == ValueType.OBJECT)) {
+	        accessor = new JsonObjectAccessor(current.asJsonObject(), part);
+	        JsonValue accessed = accessor.get();
 //	        if (accessed != null) {
 	            current = accessed;
 	            continue;
@@ -137,17 +140,17 @@ public class JsonPath {
 	      }
 	      else {
 	        if (accessor != null) {
-	          current = new JsonObject();
-	          current.getAsJsonObject().add(part, JsonNull.INSTANCE);
+	          current = Json.createObjectBuilder().build();
+	          current.asJsonObject().put(part, JsonValue.NULL);
 	          accessor.set(current);
-	          accessor = new JsonObjectAccessor(current.getAsJsonObject(), part);
+	          accessor = new JsonObjectAccessor(current.asJsonObject(), part);
 	          current = null;
 	          continue;
 	        }
 	        else {
-	          result = new JsonObject();
-	          current.getAsJsonObject().add(part, JsonNull.INSTANCE);
-	          accessor = new JsonObjectAccessor(result.getAsJsonObject(), part);
+	          result = Json.createObjectBuilder().build();
+	          current.asJsonObject().put(part, JsonValue.NULL);
+	          accessor = new JsonObjectAccessor(result.asJsonObject(), part);
 	          current = null;
 	        }
 	      }

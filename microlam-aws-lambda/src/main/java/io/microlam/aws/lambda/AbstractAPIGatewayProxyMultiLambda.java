@@ -12,8 +12,8 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 
-import io.microlam.json.JsonBuilder;
-import io.microlam.json.JsonObjectBuilder;
+import jakarta.json.Json;
+import jakarta.json.JsonObjectBuilder;
 
 
 public abstract class AbstractAPIGatewayProxyMultiLambda implements APIGatewayProxyLambda {
@@ -40,8 +40,7 @@ public abstract class AbstractAPIGatewayProxyMultiLambda implements APIGatewayPr
 			APIGatewayProxyLambda lambda = null;
 			String mappingKey = mappingKey(input, context);
 			if (mappingKey == null) {
-				JsonBuilder jsonBuilder = new JsonBuilder();
-				JsonObjectBuilder output = jsonBuilder.objectBuilder();
+				JsonObjectBuilder output = Json.createObjectBuilder();
 				output.add("result", "error");
 				String message = "mappingKey() return null...";
 				output.add("message", message);
@@ -49,13 +48,12 @@ public abstract class AbstractAPIGatewayProxyMultiLambda implements APIGatewayPr
 				APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
 				response.withStatusCode(200)
 					.withIsBase64Encoded(false)
-					.withBody(output.buildObject().toString());
+					.withBody(output.build().toString());
 				return response;
 			}
 			lambda = mapping.get(mappingKey);
 			if (lambda == null) {
-				JsonBuilder jsonBuilder = new JsonBuilder();
-				JsonObjectBuilder output = jsonBuilder.objectBuilder();
+				JsonObjectBuilder output = Json.createObjectBuilder();
 				output.add("result", "error");
 				String message = "Cannot found mapped lambda for mapping key [" + mappingKey + "]";
 				output.add("message", message);
@@ -63,7 +61,7 @@ public abstract class AbstractAPIGatewayProxyMultiLambda implements APIGatewayPr
 				APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
 				response.withStatusCode(200)
 					.withIsBase64Encoded(false)
-					.withBody(output.buildObject().toString());
+					.withBody(output.build().toString());
 				return response;
 			}
 			LOGGER.info("Entering lambda: {}" ,lambda.getClass().getName());
@@ -75,8 +73,7 @@ public abstract class AbstractAPIGatewayProxyMultiLambda implements APIGatewayPr
 		catch (Exception e) {
 			StringWriter sw = new StringWriter();
 			e.printStackTrace(new PrintWriter(sw));
-			JsonBuilder jsonBuilder = new JsonBuilder();
-			JsonObjectBuilder output = jsonBuilder.objectBuilder();
+			JsonObjectBuilder output = Json.createObjectBuilder();
 			output.add("result", "error");
 			String message = sw.toString();
 			output.add("message", message);
@@ -84,7 +81,7 @@ public abstract class AbstractAPIGatewayProxyMultiLambda implements APIGatewayPr
 			APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
 			response.withStatusCode(200)
 			.withIsBase64Encoded(false)
-			.withBody(output.buildObject().toString());
+			.withBody(output.build().toString());
 			return response;
 		}
 	}

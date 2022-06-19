@@ -1,6 +1,6 @@
 package io.microlam.json;
 
-import com.google.gson.JsonObject;
+import jakarta.json.JsonObject;
 
 public class JsonObjectMultipleEnricher implements JsonObjectEnricher {
 

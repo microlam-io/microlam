@@ -2,9 +2,12 @@ package io.microlam.json;
 
 import java.util.Comparator;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
+import jakarta.json.JsonNumber;
+import jakarta.json.JsonObject;
+import jakarta.json.JsonString;
+import jakarta.json.JsonValue;
+import jakarta.json.JsonValue.ValueType;
+
 
 public class JsonObjectComparator implements Comparator<JsonObject> {
 
@@ -28,21 +31,23 @@ public class JsonObjectComparator implements Comparator<JsonObject> {
 	}
 	
 	public int compareCroissant(JsonObject o1, JsonObject o2) {
-		JsonElement v1 = o1.get(property);
-		JsonElement v2 = o2.get(property);
-		if (v1.isJsonPrimitive()) {
-			JsonPrimitive vp1 = v1.getAsJsonPrimitive();
-			JsonPrimitive vp2 = v2.getAsJsonPrimitive();
-			if (vp1.isNumber()) {
-				if (vp1.getAsNumber().doubleValue() - vp2.getAsNumber().doubleValue() >= 0) {
+		JsonValue v1 = o1.get(property);
+		JsonValue v2 = o2.get(property);
+		if ((v1.getValueType() != ValueType.ARRAY) && (v1.getValueType() != ValueType.OBJECT)) {
+			if (v1.getValueType() == ValueType.NUMBER) {
+				JsonNumber vp1 = (JsonNumber) v1;
+				JsonNumber vp2 = (JsonNumber) v2;
+				if (vp1.numberValue().doubleValue() - vp2.numberValue().doubleValue() >= 0) {
 					return +1;
 				}
 				else {
 					return -1;
 				}
 			}
-			else if (vp1.isString()) {
-				return naturalOrder.compare(vp1.getAsString(), vp2.getAsString());
+			else if (v1.getValueType() == ValueType.STRING) {
+				JsonString vp1 = (JsonString) v1;
+				JsonString vp2 = (JsonString) v2;
+				return naturalOrder.compare(vp1.getString(), vp2.getString());
 			}
 			else {
 				return -1;
