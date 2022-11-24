@@ -6,7 +6,7 @@
   <parent>
     <groupId>io.microlam</groupId>
     <artifactId>microlam-bom</artifactId>
-    <version>0.4.2</version>
+    <version>0.4.4</version>
   </parent>
 
   <artifactId>microlam</artifactId>
@@ -41,7 +41,7 @@
 	  <connection>scm:git:ssh://git@github.com/microlam-io/${project.artifactId}.git</connection>
 	  <developerConnection>scm:git:ssh://git@github.com/microlam-io/${project.artifactId}.git</developerConnection>
 	  <url>https://github.com/microlam-io/${project.artifactId}/tree/master</url>
-  </scm>
+    </scm>
 
 	<distributionManagement>
 	  <snapshotRepository>
@@ -68,6 +68,7 @@
     <module>microlam-params-aws</module>
     <module>microlam-aws-auth</module>
     <module>microlam-aws-lambda</module>
+    <module>microlam-aws-lambda-pipeline</module>
     <module>microlam-dynamodb</module>
 </modules>
 

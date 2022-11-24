@@ -6,13 +6,13 @@
   <parent>
     <groupId>io.microlam</groupId>
     <artifactId>microlam</artifactId>
-     <version>0.4.2</version>
+     <version>0.4.4</version>
   </parent>
 
 	<artifactId>microlam-aws-lambda</artifactId>
 	<packaging>jar</packaging>
-  	<name>Microlam Pipeline for AWS Lambda</name>
-  	<description>Microlam Pipeline for AWS Lambda</description>
+  	<name>Microlam for AWS Lambda</name>
+  	<description>Microlam for AWS Lambda</description>
     <url>https://microlam.io</url>
 
   <organization>
@@ -186,11 +186,6 @@
 		<groupId>org.eclipse</groupId>
 		<artifactId>yasson</artifactId>
     </dependency>
-
-	<dependency>
-	    <groupId>io.netty</groupId>
-	    <artifactId>netty-codec</artifactId>
-	</dependency>
 
 	<dependency>
 	    <groupId>io.microlam</groupId>
