@@ -6,7 +6,7 @@
   <parent>
     <groupId>io.microlam</groupId>
     <artifactId>microlam</artifactId>
-    <version>0.5.1-SNAPSHOT</version>
+    <version>0.5.1</version>
   </parent>
 
 	<artifactId>microlam-json</artifactId>
@@ -41,7 +41,7 @@
 	  <connection>scm:git:ssh://git@github.com/microlam-io/${project.artifactId}.git</connection>
 	  <developerConnection>scm:git:ssh://git@github.com/microlam-io/${project.artifactId}.git</developerConnection>
 	  <url>https://github.com/microlam-io/${project.artifactId}/tree/master</url>
-    <tag>v0.4.1</tag>
+    <tag>v0.5.1</tag>
   </scm>
 
 	<distributionManagement>
