@@ -1,6 +1,6 @@
 package io.microlam.json;
 
-import jakarta.json.JsonValue;
+import javax.json.JsonValue;
 
 public interface JsonAccessor {
 

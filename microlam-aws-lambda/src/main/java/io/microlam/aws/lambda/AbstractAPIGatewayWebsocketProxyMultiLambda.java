@@ -12,8 +12,8 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2WebSocketEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2WebSocketResponse;
 
-import jakarta.json.Json;
-import jakarta.json.JsonObjectBuilder;
+import javax.json.Json;
+import javax.json.JsonObjectBuilder;
 
 
 public abstract class AbstractAPIGatewayWebsocketProxyMultiLambda implements APIGatewayWebsocketLambda {

@@ -4,7 +4,7 @@
   <parent>
     <groupId>io.microlam</groupId>
     <artifactId>microlam</artifactId>
-    <version>0.4.4</version>
+    <version>0.5.1-SNAPSHOT</version>
   </parent>
   
   <artifactId>microlam-dynamodb</artifactId>
@@ -153,7 +153,7 @@
       <scope>provided</scope>
     </dependency>
     
-    
+    <!--
     <dependency>
 	    <groupId>jakarta.json</groupId>
 	    <artifactId>jakarta.json-api</artifactId>
@@ -165,7 +165,23 @@
     	<artifactId>parsson</artifactId>
     	<version>1.1.0</version>
     </dependency>
-    
+    -->
+
+    <dependency>
+        <groupId>org.apache.geronimo.specs</groupId>
+        <artifactId>geronimo-json_1.1_spec</artifactId>
+     </dependency>
+
+   	<dependency>
+	    <groupId>org.apache.johnzon</groupId>
+	    <artifactId>johnzon-jsonb</artifactId>
+	</dependency>
+
+	<dependency>
+        <groupId>org.apache.geronimo.specs</groupId>
+        <artifactId>geronimo-jsonb_1.0_spec</artifactId>
+    </dependency>
+        
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

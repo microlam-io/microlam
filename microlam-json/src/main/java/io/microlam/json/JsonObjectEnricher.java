@@ -1,6 +1,6 @@
 package io.microlam.json;
 
-import jakarta.json.JsonObject;
+import javax.json.JsonObject;
 
 public interface JsonObjectEnricher {
 

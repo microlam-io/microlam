@@ -1,7 +1,7 @@
 package io.microlam.json;
 
-import jakarta.json.JsonArray;
-import jakarta.json.JsonValue;
+import javax.json.JsonArray;
+import javax.json.JsonValue;
 
 public class JsonArrayAccessor implements JsonAccessor {
 

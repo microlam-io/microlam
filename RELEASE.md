@@ -12,3 +12,12 @@ mvn -X clean -DdryRun=false  -Dresume=false release:prepare release:perform
 
 4. microlam-lambda-quickstart
 
+
+## Update child module version
+
+Modify only parent version then:
+
+```
+mvn versions:update-child-modules
+```
+

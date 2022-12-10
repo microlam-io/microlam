@@ -2,7 +2,7 @@ package io.microlam.json;
 
 import java.util.Map;
 
-import jakarta.json.JsonValue;
+import javax.json.JsonValue;
 
 public interface JsonFilter {
 
