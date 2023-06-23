@@ -6,7 +6,7 @@
   <parent>
     <groupId>io.microlam</groupId>
     <artifactId>microlam-bom</artifactId>
-    <version>0.5.2-SNAPSHOT</version>
+    <version>0.5.2</version>
   </parent>
 
   <artifactId>microlam</artifactId>
@@ -147,20 +147,13 @@
      	<plugin>
 	      <groupId>org.sonatype.plugins</groupId>
 	      <artifactId>nexus-staging-maven-plugin</artifactId>
-	      <extensions>true</extensions>
+	      <!--<extensions>true</extensions>-->
 	      <configuration>
 	        <serverId>ossrh</serverId>
 	        <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
 	        <autoReleaseAfterClose>true</autoReleaseAfterClose>
 	      </configuration>
-        <dependencies>
-        <dependency>
-          <groupId>com.thoughtworks.xstream</groupId>
-          <artifactId>xstream</artifactId>
-          <version>1.4.15</version> <!-- apparently this needs to be exactly this version -->
-        </dependency>
-      </dependencies>
-    	</plugin>
+   	</plugin>
     	
 		<plugin>
 		    <groupId>org.codehaus.mojo</groupId>
