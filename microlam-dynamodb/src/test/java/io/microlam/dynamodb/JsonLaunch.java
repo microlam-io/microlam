@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.junit.Test;
 
-import javax.json.Json;
-import javax.json.JsonObject;
+import jakarta.json.Json;
+import jakarta.json.JsonObject;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 
 public class JsonLaunch {

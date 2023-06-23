@@ -1,15 +1,18 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
-  
+
   <parent>
     <groupId>io.microlam</groupId>
     <artifactId>microlam</artifactId>
     <version>0.5.2-SNAPSHOT</version>
   </parent>
-  
-  <artifactId>microlam-dynamodb</artifactId>
-  	<name>Microlam Dynamodb Helper</name>
-  	<description>Microlam AWS Dynamodb Helper</description>
+
+	<artifactId>microlam-java-logging</artifactId>
+	<packaging>jar</packaging>
+  	<name>Microlam Java util logging for Lambda</name>
+  	<description>Microlam Java util logging for Lambda</description>
     <url>https://microlam.io</url>
 
   <organization>
@@ -53,73 +56,75 @@
 	</distributionManagement>
 
   <properties>
-    <jdk.version>8</jdk.version>
+    <jdk.version>11</jdk.version>
     <maven.compiler.source>${jdk.version}</maven.compiler.source>
     <maven.compiler.target>${jdk.version}</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <netty.version>4.1.56.Final</netty.version>
+    <slf4j.version>2.0.0-alpha5</slf4j.version>
+    <junit.version>4.12</junit.version>
     <gpg.keyname>8011431D42D5A9ACBEF8B2A6D153D68FA8DF084C</gpg.keyname>
   </properties>
 
-<build>
-	<plugins>
-	  <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-          <encoding>UTF-8</encoding>
-          <forceJavacCompilerUse>true</forceJavacCompilerUse>
-        </configuration>
-      </plugin>
-      
-      <plugin>
-      	<groupId>org.apache.maven.plugins</groupId>
-      	<artifactId>maven-source-plugin</artifactId>
-      	<executions>
-      		<execution>
-      			<id>attach-sources</id>
-      			<goals>
-      				<goal>jar</goal>
-      			</goals>
-      		</execution>
-      	</executions>
-      </plugin>
-      
-      <plugin>
-      	<groupId>org.apache.maven.plugins</groupId>
-      	<artifactId>maven-javadoc-plugin</artifactId>
-      	<executions>
-      		<execution>
-      			<id>attach-javadocs</id>
-      			<goals>
-      				<goal>jar</goal>
-      			</goals>
-      		</execution>
-      	</executions>
-      </plugin>
-      
-     <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-gpg-plugin</artifactId>
-      <executions>
-        <execution>
-          <id>sign-artifacts</id>
-          <phase>verify</phase>
-          <goals>
-            <goal>sign</goal>
-          </goals>
-          <configuration>
-              <keyname>${gpg.keyname}</keyname>
-              <executable>/usr/local/bin/gpg</executable>
-          </configuration>    
-        </execution>
-      </executions>
-    </plugin>
-      
-    	<plugin>
+	<build>
+		<plugins>
+		  <plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-compiler-plugin</artifactId>
+	        <configuration>
+			  <release>11</release>
+	          <encoding>UTF-8</encoding>
+	          <forceJavacCompilerUse>true</forceJavacCompilerUse>
+	        </configuration>
+	      </plugin>
+	      
+	      <plugin>
+	      	<groupId>org.apache.maven.plugins</groupId>
+	      	<artifactId>maven-source-plugin</artifactId>
+	      	<executions>
+	      		<execution>
+	      			<id>attach-sources</id>
+	      			<goals>
+	      				<goal>jar</goal>
+	      			</goals>
+	      		</execution>
+	      	</executions>
+	      </plugin>
+	      
+	      <plugin>
+	      	<groupId>org.apache.maven.plugins</groupId>
+	      	<artifactId>maven-javadoc-plugin</artifactId>
+	      	<executions>
+	      		<execution>
+	      			<id>attach-javadocs</id>
+	      			<goals>
+	      				<goal>jar</goal>
+	      			</goals>
+	      		</execution>
+	      	</executions>
+	      </plugin>
+	      
+	     <plugin>
+	      <groupId>org.apache.maven.plugins</groupId>
+	      <artifactId>maven-gpg-plugin</artifactId>
+	      <executions>
+	        <execution>
+	          <id>sign-artifacts</id>
+	          <phase>verify</phase>
+	          <goals>
+	            <goal>sign</goal>
+	          </goals>
+	          <configuration>
+	              <keyname>${gpg.keyname}</keyname>
+	              <executable>/usr/local/bin/gpg</executable>
+	          </configuration>    
+	        </execution>
+	      </executions>
+	    </plugin>
+	      
+     	<plugin>
 	      <groupId>org.sonatype.plugins</groupId>
 	      <artifactId>nexus-staging-maven-plugin</artifactId>
 	      <extensions>true</extensions>
@@ -136,45 +141,42 @@
         </dependency>
       </dependencies>
     	</plugin>
-    	
+	    	
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
       </plugin>
 
-	</plugins>
-	
-</build>
-  
+		</plugins>
+		
+	</build>
+
   <dependencies>
+
+     <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    
+    
+    <dependency> 
+	  <groupId>org.slf4j</groupId>
+	  <artifactId>slf4j-jdk14</artifactId>
+	</dependency>
+
     <dependency>
-      <groupId>software.amazon.awssdk</groupId>
-      <artifactId>dynamodb</artifactId>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-lambda-java-core</artifactId>
       <scope>provided</scope>
     </dependency>
-    
-    <dependency>
-	    <groupId>jakarta.json</groupId>
-	    <artifactId>jakarta.json-api</artifactId>
+
+	<dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		<scope>test</scope>
 	</dependency>
-    
-    <dependency>
-    	<groupId>org.eclipse.parsson</groupId>
-    	<artifactId>parsson</artifactId>
-    </dependency>
-        
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
-    
-    <dependency>
-	  <groupId>io.microlam</groupId>
-  	  <artifactId>microlam-aws-auth</artifactId>
-	  <scope>test</scope>
-	</dependency>
-    
+
   </dependencies>
-    
+
+
 </project>

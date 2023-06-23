@@ -71,6 +71,7 @@
     <module>microlam-aws-lambda</module>
     <module>microlam-aws-lambda-pipeline</module>
     <module>microlam-dynamodb</module>
+    <module>microlam-java-logging</module>
 </modules>
 
 <build>
