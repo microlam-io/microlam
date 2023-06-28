@@ -37,6 +37,11 @@ public class ParameterStoreProviderPath implements AttributesProvider {
 		this.prefix = prefix;
 	}
 
+	public ParameterStoreProviderPath(SsmClient ssmClient, String prefix) {
+		this.prefix = prefix;
+		this.ssmClient = ssmClient;
+	}
+
 	public Map<String,String> preloadParameters() {
 		GetParametersByPathRequest getParametersByPathRequest = GetParametersByPathRequest.builder().path(prefix).withDecryption(Boolean.TRUE).build();
 		GetParametersByPathResponse getParametersByPathResponse = getSSMClient().getParametersByPath(getParametersByPathRequest);

@@ -38,22 +38,23 @@ public class InMemoryCachingAttributesProvider implements AttributesProvider {
 	public String getStringValue(String parameter, String defaultValue) {
 		ExpiringVariable<String> expiringVariable = memoryCache.get(parameter);
 		if (expiringVariable == null) {
-			LOGGER.info("expiringVariable is null [" + parameter + "]");
+			LOGGER.debug("ExpiringVariable not found in cache: [{}]", parameter);
 			expiringVariable = new ExpiringVariable<>(expiryInMs);
 			memoryCache.put(parameter, expiringVariable);
 		}
 		else {
 			SnapshotValue<String> snapshotValue = expiringVariable.getSnapshotValue();
-			LOGGER.info("expiringVariable not null");
+			LOGGER.debug("ExpiringVariable found in cache: [{}]", parameter);
 
 			if (! snapshotValue.isExpired()) {
-				LOGGER.info("snapshotValue not expired: " + snapshotValue.getValue());
+				LOGGER.info("ExpiringVariable used from cache: [{} = {}]", parameter, snapshotValue.getValue());
 				return snapshotValue.getValue();
 			}
-			LOGGER.info("snapshotValue expired");
+			LOGGER.debug("ExpiringVariable expired: [{}]", parameter);
 		}
 		String value = attributesProvider.getStringValue(parameter, defaultValue);
 		expiringVariable.setValue(value);
+		LOGGER.info("Set expiringVariable in cache: [{} = {}]", parameter, value);
 		return value;
 	}
 
