@@ -21,3 +21,8 @@ Modify only parent version then:
 mvn versions:update-child-modules
 ```
 
+
+## Dealing with expired gpg key
+
+see [doc](https://central.sonatype.org/publish/requirements/gpg/#dealing-with-expired-keys)
+ 
