@@ -24,6 +24,15 @@ public class DynamoDBHelper {
 	
 	public final static AttributeValue ATTRIBUTE_VALUE_EMPTY = AttributeValue.builder().build();
 
+    public static AttributeValue transformFrom(JsonValue input) {
+    	JsonValueToAttributeValueMapConverter attributeValueMapConverter = JsonValueToAttributeValueMapConverter.instance();
+        return attributeValueMapConverter.visit(input);
+    }
+
+    public static JsonValue transformTo(AttributeValue input) {
+    	JsonValueAttributeConverter jsonValueAttributeConverter = JsonValueAttributeConverter.create();
+    	return jsonValueAttributeConverter.transformTo(input);
+    }
 
 	public static String verifyReservedName(String attribute, Map<String, String> attributeNames, AttributeNameGenerator attributeNameGenerator) {
 		StringBuffer newName = new StringBuffer();
@@ -146,6 +155,7 @@ public class DynamoDBHelper {
 	public static AttributeValue convert(JsonValue value, JsonObject metadata) {
 		return convert(value, metadata, "$");
 	}
+	
 	public static AttributeValue convert(JsonValue value, JsonObject metadata, String prefix) {
 		AttributeValue attributeValue;
 		ValueType jsonType = value.getValueType();

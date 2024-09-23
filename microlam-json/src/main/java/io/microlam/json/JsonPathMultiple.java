@@ -1,11 +1,9 @@
 package io.microlam.json;
 
-import java.io.StringReader;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
 
-import jakarta.json.Json;
-import jakarta.json.JsonString;
-import jakarta.json.JsonValue;
-import jakarta.json.JsonValue.ValueType;
 
 public class JsonPathMultiple {
 	
@@ -24,13 +22,14 @@ public class JsonPathMultiple {
 	}
 
 
-	public JsonValue get(String jsonObject) {
-		JsonValue json = Json.createParser(new StringReader(jsonObject)).getValue();
+	public JsonElement get(String jsonObject) {
+		Gson gson = new Gson();
+		JsonElement json = gson.fromJson(jsonObject, JsonElement.class);
 	    return get(json);
 	}
 	
-	public JsonValue get(JsonValue jsonObject) {
-		JsonValue current = jsonObject;
+	public JsonElement get(JsonElement jsonObject) {
+		JsonElement current = jsonObject;
 		for(int i = 0; i<jsonPaths.length; i++) {
 			JsonPath jsonPath = jsonPaths[i];
 			current = jsonPath.get(current);
@@ -38,10 +37,10 @@ public class JsonPathMultiple {
 				return null;
 			}
 			if (i != jsonPaths.length-1) {
-				if  ((current.getValueType() != ValueType.ARRAY) && (current.getValueType() != ValueType.OBJECT)){
-					if (current.getValueType() == ValueType.STRING) {
-						JsonString currentPrimitive = (JsonString) current;
-						current = Json.createParser(new StringReader(currentPrimitive.getString())).getValue();
+				if  ((! current.isJsonArray()) && (! current.isJsonObject())){
+					if (current.isJsonPrimitive() && current.getAsJsonPrimitive().isString()) {
+						JsonPrimitive currentPrimitive = (JsonPrimitive) current;
+						current = currentPrimitive;
 					}
 					else {
 						return null;

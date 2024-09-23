@@ -1,18 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
+  
   <parent>
     <groupId>io.microlam</groupId>
     <artifactId>microlam</artifactId>
-     <version>0.6.3</version>
+    <version>0.6.2</version>
   </parent>
-
-	<artifactId>microlam-params</artifactId>
-	<packaging>jar</packaging>
-  	<name>Microlam Parameters API</name>
-  	<description>Microlam Parameters API</description>
+  
+  <artifactId>microlam-dynamodb</artifactId>
+  	<name>Microlam Dynamodb Helper</name>
+  	<description>Microlam AWS Dynamodb Helper</description>
     <url>https://microlam.io</url>
 
   <organization>
@@ -62,9 +59,6 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <netty.version>4.1.56.Final</netty.version>
-    <slf4j.version>2.0.0-alpha5</slf4j.version>
-    <junit.version>4.12</junit.version>
     <gpg.keyname>8011431D42D5A9ACBEF8B2A6D153D68FA8DF084C</gpg.keyname>
   </properties>
 
@@ -133,7 +127,7 @@
 	        <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
 	        <autoReleaseAfterClose>true</autoReleaseAfterClose>
 	      </configuration>
-    	</plugin>
+     	</plugin>
     	
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -143,15 +137,36 @@
 	</plugins>
 	
 </build>
-
+  
   <dependencies>
-
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
+      <groupId>software.amazon.awssdk</groupId>
+      <artifactId>dynamodb</artifactId>
+      <scope>provided</scope>
     </dependency>
     
+    <dependency>
+	    <groupId>jakarta.json</groupId>
+	    <artifactId>jakarta.json-api</artifactId>
+	</dependency>
+    
+    <dependency>
+    	<groupId>org.eclipse.parsson</groupId>
+    	<artifactId>parsson</artifactId>
+    </dependency>
+        
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+	  <groupId>io.microlam</groupId>
+  	  <artifactId>microlam-aws-auth</artifactId>
+	  <scope>test</scope>
+	</dependency>
+    
   </dependencies>
-
-
+    
 </project>

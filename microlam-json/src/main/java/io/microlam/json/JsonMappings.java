@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import jakarta.json.Json;
-import jakarta.json.JsonValue;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 
 public class JsonMappings implements JsonFilter {
 
@@ -27,30 +29,30 @@ public class JsonMappings implements JsonFilter {
 	}
 
 	@Override
-	public JsonValue filter(JsonValue source, Map<String,String> uploadedFiles) {
+	public JsonElement filter(JsonElement source, Map<String,String> uploadedFiles) {
 		List<String> uploadFilesPart = new ArrayList<>();
-		JsonValue result = null;
+		JsonElement result = null;
 		for(JsonMapping jsonMapping: mappings)  {
 			if (result == null) {
 				if  (jsonMapping.pathDestination.startsWith("[")) {
-					result = Json.createArrayBuilder().build();
+					result = new JsonArray();
 				}
 				else {
-					result =  Json.createObjectBuilder().build();
+					result =  new JsonObject();
 				}
 			}
 			//Step 1: get the source
 			JsonPath jsonPath  = new JsonPath(jsonMapping.pathSource);
-			JsonValue partial = jsonPath.get(source);
+			JsonElement partial = jsonPath.get(source);
 			
-			JsonValue transformed = partial;
+			JsonElement transformed = partial;
 			
 			//Step 2:  transform the source
 			if (jsonMapping.parts != null) {
 				if (jsonFilterResolver == null) {
 					throw new RuntimeException("JsonFilterResolver while needing to resolve filter names = " + jsonMapping.parts);
 				}
-				JsonValue current = partial;
+				JsonElement current = partial;
 				for(int i=0; i<jsonMapping.parts.length; i++) {
 					JsonMappingPart jsonMappingPart = jsonMapping.parts[i];
 					JsonPartFilter jsonFilter = jsonFilterResolver.provide(jsonMappingPart);

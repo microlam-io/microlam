@@ -1,7 +1,8 @@
 package io.microlam.json;
 
-import jakarta.json.JsonObject;
-import jakarta.json.JsonValue;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 
 public class JsonObjectAccessor implements JsonAccessor {
 
@@ -15,13 +16,13 @@ public class JsonObjectAccessor implements JsonAccessor {
 	}
 
 	@Override
-	public JsonValue set(JsonValue value) {
-		map.put(member, value);
+	public JsonElement set(JsonElement value) {
+		map.add(member, value);
 		return map;
 	}
 
 	@Override
-	public JsonValue get() {
+	public JsonElement get() {
 		return map.get(member);
 	}
 

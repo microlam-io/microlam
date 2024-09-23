@@ -163,7 +163,7 @@ public abstract class AbstractCognitoTokenAuthorizerHandler implements RequestHa
 		
 		MethodArn methodArn = new MethodArn(input.getMethodArn());
 		
-		String arn = methodArn.format("*");
+		String arn = methodArn.allowEverythingOnStage();
 				
 //		JsonBuilder2 jsonBuilder2 = new JsonBuilder2();
 //		JsonElement jsonContext = jsonBuilder2.convert(jwtClaims.getClaimsMap());

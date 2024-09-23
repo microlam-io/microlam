@@ -46,7 +46,11 @@ public class MethodArn {
 			return String.format("arn:aws:execute-api:%s:%s:%s/%s/%s/%s", region, awsAccountId, restApiId, stage, httpMethod, resource);
 		}
 	}
-	
+
+	public String allowEverythingOnStage() {
+		return String.format("arn:aws:execute-api:%s:%s:%s/%s/%s/%s", region, awsAccountId, restApiId, stage, "*", "*");
+	}
+
 	public String allowEverythingOnAccount() {
 		return String.format("arn:aws:execute-api:%s:%s:%s/%s/%s/%s", region, awsAccountId, "*", "*", "*", "*");
 	}

@@ -1,11 +1,11 @@
 package io.microlam.json;
 
-import jakarta.json.JsonValue;
+import com.google.gson.JsonElement;
 
 public interface JsonAccessor {
 
-	JsonValue set(JsonValue value);
+	JsonElement set(JsonElement value);
 	
-	JsonValue get();
+	JsonElement get();
 	
 }
