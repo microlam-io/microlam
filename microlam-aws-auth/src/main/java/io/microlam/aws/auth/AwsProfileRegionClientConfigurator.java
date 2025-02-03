@@ -11,7 +11,7 @@ public class AwsProfileRegionClientConfigurator {
 	
 	protected static AwsProfileRegionClientConfigurator instance = new AwsProfileRegionClientConfigurator();
 	protected static String profile = null;
-	protected static Region region = Region.EU_WEST_1;
+	protected static Region region = null;
 
 	public static AwsProfileRegionClientConfigurator getInstance() {
 		return instance; 
@@ -34,7 +34,9 @@ public class AwsProfileRegionClientConfigurator {
 	}
 
 	public <BuilderT extends AwsClientBuilder<BuilderT, ClientT>, ClientT> AwsClientBuilder<BuilderT, ClientT> configure(AwsClientBuilder<BuilderT, ClientT> builder) {
-		builder.region(region);
+		if (region != null) {
+			builder.region(region);
+		}
 		if (profile != null) {
 			builder.credentialsProvider(ProfileCredentialsProvider.create(profile));
 		}

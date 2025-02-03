@@ -4,7 +4,7 @@
   <parent>
     <groupId>io.microlam</groupId>
     <artifactId>microlam</artifactId>
-    <version>0.6.3</version>
+    <version>0.6.4</version>
   </parent>
   
   <artifactId>microlam-dynamodb</artifactId>
@@ -60,7 +60,20 @@
     <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <gpg.keyname>8011431D42D5A9ACBEF8B2A6D153D68FA8DF084C</gpg.keyname>
+    <aws.sdk.version>2.30.11</aws.sdk.version>
   </properties>
+
+	<dependencyManagement>
+		<dependencies>
+			 <dependency>
+			      <groupId>software.amazon.awssdk</groupId>
+			      <artifactId>bom</artifactId>
+			      <version>${aws.sdk.version}</version>
+			      <type>pom</type>
+			      <scope>import</scope>
+	   		 </dependency>
+   		 </dependencies>
+   	</dependencyManagement>	 
 
 <build>
 	<plugins>
